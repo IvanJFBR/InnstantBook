@@ -1,10 +1,18 @@
 package com.example.innstantbook.presentation.ui.home
 
+import android.view.LayoutInflater
+import android.view.ViewGroup
 import com.example.innstantbook.R
 import com.example.innstantbook.databinding.ActivityHomeBinding
+import com.example.innstantbook.databinding.HotelItemBinding
+import com.example.innstantbook.databinding.MenuItemBinding
+import com.example.innstantbook.networking.model.HotelsResponse
+import com.example.innstantbook.presentation.adapters.CustomListAdapter
+import com.example.innstantbook.presentation.adapters.HorizontalMenuViewHolder
 import com.example.innstantbook.presentation.models.Menu
 import com.example.innstantbook.presentation.models.MenuItem
 import com.example.innstantbook.presentation.models.MenuType
+import com.example.innstantbook.presentation.ui.home.adapter.HotelsViewHolder
 
 class HomeLayoutContainer(
     private val binding: ActivityHomeBinding
@@ -41,5 +49,26 @@ class HomeLayoutContainer(
                 )
             )
         )
+    }
+
+    fun setContent(hotels: List<HotelsResponse>) {
+        binding.rvHotels.apply {
+            adapter = object : CustomListAdapter<HotelsResponse, HotelsViewHolder>() {
+                override fun getViewHolderInstance(
+                    parent: ViewGroup,
+                    viewType: Int
+                ): HotelsViewHolder {
+                    return HotelsViewHolder(
+                        HotelItemBinding.inflate(
+                            LayoutInflater.from(parent.context), parent, false
+                        )
+                    ) {
+
+                    }
+                }
+            }.apply {
+                contentList = hotels
+            }
+        }
     }
 }
