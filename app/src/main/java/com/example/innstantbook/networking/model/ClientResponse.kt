@@ -2,11 +2,11 @@ package com.example.innstantbook.networking.model
 
 import com.google.gson.annotations.SerializedName
 
-data class HotelsResponse(
+data class ClientResponse(
     @SerializedName("cnpj")
-    val cnpj: String,
+    val cpf: String,
     @SerializedName("nome")
     val name: String,
-    @SerializedName("endereco")
-    val address: String
+    @SerializedName("email")
+    val email: String
 )
